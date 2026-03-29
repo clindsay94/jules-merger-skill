@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Jules Merger Configuration",
+  "description": "Configuration schema for the jules-merger-skill agent orchestration.",
+  "type": "object",
+  "properties": {
+    "target_branch": {
+      "type": "string",
+      "description": "The base branch to branch off of and merge into (e.g., main, master, develop).",
+      "default": "main"
+    },
+    "test_command": {
+      "type": "string",
+      "description": "The exact shell command used to run the project's test suite."
+    },
+    "lint_command": {
+      "type": "string",
+      "description": "The exact shell command used to run linters or static analysis."
+    },
+    "auto_fix_attempts": {
+      "type": "integer",
+      "description": "Maximum number of times the agent should attempt to auto-fix failing tests or lint errors.",
+      "default": 3,
+      "minimum": 0
+    },
+    "require_human_review_for": {
+      "type": "array",
+      "description": "Categories or keywords that immediately trigger a Draft PR without auto-merging.",
+      "items": {
+        "type": "string"
+      },
+      "default": ["Security", "Architecture"]
+    }
+  },
+  "additionalProperties": false
+}
